@@ -1,0 +1,24 @@
+---
+title: "Homework 5"
+author: "Danara flores"
+date: "2024-11-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+```
+
+```{r}
+homicides<- read.csv("/Users/danaraflores/Desktop/R programing 535/Homework 5/hw 5/data/homicide-data.csv")
+city_homicides <- homicides %>%
+  filter(city == "Chicago")
+
+
+```
+
+```{r}
+
+```
+
