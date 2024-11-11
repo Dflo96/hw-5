@@ -13,7 +13,11 @@ library(tidyverse)
 ```{r}
 homicides<- read.csv("/Users/danaraflores/Desktop/R programing 535/Homework 5/hw 5/data/homicide-data.csv")
 city_homicides <- homicides %>%
-  filter(city == "Chicago")
+  filter(city == "Baltimore") %>% 
+  separate(reported_date, into = c("year", "month", "day"), sep = c(4, 6)) %>% 
+  group_by()
+  
+ggplot(city_homicides, aes())
 
 
 ```
