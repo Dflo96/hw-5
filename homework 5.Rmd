@@ -23,20 +23,21 @@ city_homicides <- homicides %>%
 monthly_homs<- city_homicides %>% 
   group_by(year,month) %>%
   summarize(total = n()) %>% 
-   mutate(season = if_else(month >= 5 & month <= 10, "Summer", "Winter"),
-          season = fct_relevel(season, c("Summer", "Winter")))
+   mutate(season = if_else(month >= 5 & month <= 10, "Summer", "Winter"),  
+          season = fct_relevel(season, c("Summer", "Winter")),
+          new_date = my(str_c(month,year, sep = "-")))
 
 #need to decider what months are summer which are winter
 
-
-
-hw5plot<- ggplot(, aes( x = )) +
+#work with Plot
+hw5plot<- monthly_homs %>% 
+  ggplot(aes( x = new_date, fill = season))+
   geom_histogram()+
   theme_dark()+
   ggtitle("Homicides in Baltimore, MD")+
   xlab("Date")+
   ylab("Monthly homicides")
-  
+  #looks odd not separating out how i wanted I think its the date issue....
   
 print(hw5plot)
 
