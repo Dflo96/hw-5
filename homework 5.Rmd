@@ -8,16 +8,27 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
+library(lubridate)
 ```
 
 ```{r}
 homicides<- read.csv("/Users/danaraflores/Desktop/R programing 535/Homework 5/hw 5/data/homicide-data.csv")
 city_homicides <- homicides %>%
-  filter(city == "Baltimore") %>% 
-  separate(reported_date, into = c("year", "month", "day"), sep = c(4, 6)) %>% 
-  group_by()
+  filter(city == "Baltimore")%>% 
+  mutate( reported_date = ymd(reported_date))
+
+#need to decider what months are summer which are winter
+#need counts of homicides per month 
   
-ggplot(city_homicides, aes())
+hw5plot<- ggplot(city_homicides, aes( x = reported_date)) +
+  geom_histogram()+
+  theme_dark()+
+  ggtitle("Homicides in Baltimore, MD")+
+  xlab("Date")+
+  ylab("Monthly homicides")
+  
+  
+print(hw5plot)
 
 
 ```
