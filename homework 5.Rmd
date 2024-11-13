@@ -18,13 +18,13 @@ city_homicides <- homicides %>%
   mutate( reported_date = ymd(reported_date),
           month = month(reported_date),
           year = year(reported_date))
-         
+
 #need counts of homicides per month 
 monthly_homs<- city_homicides %>% 
   group_by(year,month) %>%
-  summarize(total = n())
-
-
+  summarize(total = n()) %>% 
+   mutate(season = if_else(month >= 5 & month <= 10, "Summer", "Winter"),
+          season = fct_relevel(season, c("Summer", "Winter")))
 
 #need to decider what months are summer which are winter
 
