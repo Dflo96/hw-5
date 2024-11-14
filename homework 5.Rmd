@@ -17,29 +17,29 @@ city_homicides <- homicides %>%
   filter(city == "Baltimore")%>%
   mutate( reported_date = ymd(reported_date),
           month = month(reported_date),
-          year = year(reported_date))
+          year = year(reported_date),
+          year_mon = paste0(year, month)) #Added here, could put it in to the bottome monthly homs
 
 #need counts of homicides per month 
 monthly_homs<- city_homicides %>% 
-  group_by(year,month) %>%
+  group_by(year,month, year_mon) %>%
   summarize(total = n()) %>% 
-   mutate(season = if_else(month >= 5 & month <= 10, "Summer", "Winter"),  
-          season = fct_relevel(season, c("Summer", "Winter")),
-          new_date = my(str_c(month,year, sep = "-")))
+   mutate(year_mon = ym(year_mon),  #changed to date here to make the graph better
+          season = if_else(month >= 5 & month <= 10, "Summer", "Winter"),  
+          season = fct_relevel(season, c("Summer", "Winter")))
 
 #need to decider what months are summer which are winter
 
 #work with Plot
 hw5plot<- monthly_homs %>% 
-  ggplot(aes( x = new_date, fill = season))+
-  geom_histogram()+
+  ggplot()+
+  geom_histogram(aes(x=new_date))+
   theme_dark()+
   ggtitle("Homicides in Baltimore, MD")+
   xlab("Date")+
   ylab("Monthly homicides")
-  #looks odd not separating out how i wanted I think its the date issue....
-  
-print(hw5plot)
+
+  print(hw5plot)
 
 
 ```
