@@ -62,7 +62,7 @@ freddie<-city_homicides %>%
 
 Freddie_plot<-  ggplot( data = MD_homs)+
   geom_bar(aes(x= year_mon, weight = total, fill= season))+ #fix here to add in the totals per month
-  geom_smooth(aes(x = year_mon, y = total), color = "blue")+        #need to smooth this line out to better follow graph 
+  geom_smooth(aes(x = year_mon, y = total), color = "blue",span = 0.1)+        #need to smooth this line out to better follow graph 
   scale_fill_manual(name = " ", values = c("Winter" = "slategray1",
                                "Summer" = "gray87"))+ #need to move legend to the bottom 
   theme_dark()+
@@ -70,10 +70,8 @@ Freddie_plot<-  ggplot( data = MD_homs)+
   xlab("Date")+
   ylab("Monthly homicides")+
   geom_vline(xintercept = as.Date(freddie$date_arrest), color = "red", linetype = 2, size = 2)+
-  annotate("text",x = as.Date(freddie$date_arrest), y = 40, label = "Arrest of Freddie Grey", color = "white") +
+  annotate("text",x = as.Date(freddie$date_arrest), y = 35, label = "Arrest of Freddie Grey", color = "white", hjust =1.05, size = 6) +
   theme(legend.position = "bottom")
-
-
 
 
 print(Freddie_plot)
