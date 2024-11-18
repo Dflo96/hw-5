@@ -73,6 +73,6 @@ Freddie_plot<-  ggplot( data = MD_homs)+
 print(Freddie_plot)
 
 
-ggsave(filename = "Homicides in Baltimore, MD.pdf", plot = Freddie_plot, path = "/Users/danaraflores/Desktop/R programing 535/Homework 5/hw 5/writing", width = 15, height = 4)
+ggsave(filename = "HW_Homicides in Baltimore, MD.pdf", plot = Freddie_plot, path = "/Users/danaraflores/Desktop/R programing 535/Homework 5/hw 5/writing", width = 15, height = 4)
 ```
 
