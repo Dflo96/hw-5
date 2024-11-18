@@ -52,26 +52,27 @@ plot1<-  ggplot( data = MD_homs)+
 ```{r find_freddie}
 freddie<-city_homicides %>% 
   filter(victim_last == "GREY") %>% 
-  mutate(date_arrest = reported_date)
+  mutate(date_arrest = as.Date(reported_date))
 
-print(freddie)
+#helped find the arrest date or reported date to be 2015- 04 -30.  ymd
+
 ```
 
-```{r add_freddie}
+```{r add_freddie, fig.width= 15, fig.height= 5}
 
 Freddie_plot<-  ggplot( data = MD_homs)+
   geom_bar(aes(x= year_mon, weight = total, fill= season))+ #fix here to add in the totals per month
-  geom_smooth(aes(x = year_mon, y = total), color = "blue")+
+  geom_smooth(aes(x = year_mon, y = total), color = "blue")+.        #need to smooth this line out to better follow graph 
   scale_fill_manual(name = " ", values = c("Winter" = "slategray1",
                                "Summer" = "gray87"))+
   theme_dark()+
   ggtitle("Homicides in Baltimore, MD")+
   xlab("Date")+
-  ylab("Monthly homicides")
+  ylab("Monthly homicides")+
+  geom_vline(xintercept = freddie$date_arrest, color = "red", linetype = 2)
 
 
 
-
-
+print(Freddie_plot)
 ```
 
